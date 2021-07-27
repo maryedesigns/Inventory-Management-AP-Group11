@@ -1,12 +1,12 @@
 const { response } = require('express');
 const User = require('../model/userModel');
-const utils = require('../utils/utils')
+const utils = require('../utils/utils');
 
 exports.signUp = async (req, res) => {
     const body = req.body;
     let user = { firstName, lastName, email, password } = body;
     const confirmPassword = body.confirmPassword
-    if (await utils.emailExist(email)) {
+    if (!await utils.emailExist(email)) {
         const correctPassword = utils.getCorrectPassword(password,confirmPassword)
         if (correctPassword) {
             password = await utils.hashPassword(correctPassword)
@@ -15,13 +15,13 @@ exports.signUp = async (req, res) => {
             res.status(201).json({
                 message: 'User Account Creation Successful!',
                 
-            })
+            });
          }
         else {
             res.status(406).json({
             status: 'failed!',
             message: 'Password Mismatch'
-            })
+            });
     }
     }
     else {

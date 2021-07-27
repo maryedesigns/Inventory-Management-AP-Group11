@@ -13,16 +13,16 @@ exports.hashPassword = async (password) => {
    } catch (error) {
        console.error(error);
    }
-    return hashedPassword
+    return hashedPassword;
 }
 exports.emailExist = async (email) => {
-    let found
+    let found;
     try {
-         found = userModel.getUser(email)
+         found = await userModel.getUser(email)
     } catch (error) {
         console.error(error);
     }
-    return found?true:false
+    return found?true:false;
 }
 exports.isCorrectPassword = async (password, orignalPassword) => {
     let response;
